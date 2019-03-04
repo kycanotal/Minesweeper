@@ -15,11 +15,12 @@ void setup ()
     Interactive.make( this );
     
     //your code to initialize buttons goes here
-    buttons = new int [NUM_ROWS] [NUM_COLS];
-    MSButton = new buttons;
-    for(int r = 0; r < NUM_ROWS;r++)
-        for(int c = 0; c < NUM_COLS; c++)
-            buttons[r][c] = 
+    buttons = new MSButton [NUM_ROWS] [NUM_COLS];
+    for(int r = 0; r < NUM_ROWS;r++){
+        for(int c = 0; c < NUM_COLS; c++){
+            buttons[r][c] = new MSButton(r,c);
+        }
+    }
     
     
     
@@ -59,8 +60,8 @@ public class MSButton
     
     public MSButton ( int rr, int cc )
     {
-        // width = 400/NUM_COLS;
-        // height = 400/NUM_ROWS;
+         width = 400/NUM_COLS;
+         height = 400/NUM_ROWS;
         r = rr;
         c = cc; 
         x = c*width;
