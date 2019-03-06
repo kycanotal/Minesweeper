@@ -1,9 +1,9 @@
 
 
 import de.bezier.guido.*;
-public final static int NUM_ROWS = 5; 
-public final static int NUM_COLS = 5;
-public final static int NUM_BOMBS = 3;
+public final static int NUM_ROWS = 20; 
+public final static int NUM_COLS = 20;
+public final static int NUM_BOMBS = 7;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 
@@ -93,7 +93,16 @@ public class MSButton
   public void mousePressed () 
   {
     clicked = true;
-    //your code here
+    if(mouseButton == RIGHT){
+    marked  = !marked;
+    if(marked == false)
+    clicked == false;
+    }
+    else if(bombs.contains(this))
+    displayLosingMessage();
+    else if (countBombs(r,c) > 0)
+    setLabel("" +countBombs(r,c));
+    else return mousePressed()//your code here
   }
 
   public void draw () 
@@ -117,13 +126,29 @@ public class MSButton
   }
   public boolean isValid(int r, int c)
   {
-    //your code here
-    return false;
+    if(r >= 0 && r < 20 && c >= 0 && c < 20)
+    return true;//your code here
+    else return false;
   }
   public int countBombs(int row, int col)
   {
     int numBombs = 0;
-    //your code here
+    if(isValid(row,col+1) == true && bombs.contains(buttons[row][col + 1]))
+      numBombs++;
+    if(isValid(row,col-1) == true && bombs.contains(buttons[row][col - 1]))
+      numBombs++;
+    if(isValid(row + 1,col) == true && bombs.contains(buttons[row+1][col]))
+      numBombs++;
+    if(isValid(row + 1,col + 1) == true && bombs.contains(buttons[row+1][col+1]))
+      numBombs++; 
+    if(isValid(row + 1,col - 1) == true && bombs.contains(buttons[row+1][col-1]))
+      numBombs++;
+    if(isValid(row - 1,col) == true && bombs.contains(buttons[row-1][col]))
+      numBombs++;
+    if(isValid(row - 1, col + 1) == true && bombs.contains(buttons[row-1][col+1]))
+      numBombs++;
+    if(isValid(row - 1, col - 1)== true && bombs.contains(buttons[row-1][col-1]))
+      numBombs++; //your code here
     return numBombs;
   }
 }
