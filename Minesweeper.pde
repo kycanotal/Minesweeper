@@ -3,7 +3,7 @@
 import de.bezier.guido.*;
 public final static int NUM_ROWS = 20; 
 public final static int NUM_COLS = 20;
-public final static int NUM_BOMBS = 7;
+public final static int NUM_BOMBS = 10;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); //ArrayList of just the minesweeper buttons that are mined
 
@@ -49,9 +49,16 @@ public void draw ()
 }
 public boolean isWon()
 {
-  //your code here
+  for(int win = 0; win < bombs.size(); win++){
+    
+      if(bombs.get(win).isMarked() == false)//your code here
   return false;
-}
+    }
+  return true;
+  }
+  //your code here
+  
+
 public void displayLosingMessage()
 {
   //your code here
@@ -96,13 +103,31 @@ public class MSButton
     if(mouseButton == RIGHT){
     marked  = !marked;
     if(marked == false)
-    clicked == false;
+    clicked = false;
     }
     else if(bombs.contains(this))
     displayLosingMessage();
     else if (countBombs(r,c) > 0)
     setLabel("" +countBombs(r,c));
-    else return mousePressed()//your code here
+    else {
+      if(isValid(r, c + 1) == true && buttons[r][c+1].isClicked() == false)
+        buttons[r][c+1].mousePressed();
+      if(isValid(r,c-1) == true && buttons[r][c-1].isClicked() == false)
+        buttons[r][c-1].mousePressed();
+      if(isValid(r+1,c) == true && buttons[r+1][c].isClicked() == false)
+        buttons[r+1][c].mousePressed();
+      if(isValid(r+1,c+1) == true && buttons[r+1][c+1].isClicked() == false)
+        buttons[r+1][c+1].mousePressed();
+      if(isValid(r+1,c-1) == true && buttons[r+1][c-1].isClicked() == false)
+        buttons[r+1][c-1].mousePressed();
+      if(isValid(r-1,c) == true && buttons[r-1][c].isClicked() == false)
+        buttons[r-1][c].mousePressed();
+      if(isValid(r-1,c+1) == true && buttons[r-1][c+1].isClicked() == false)
+        buttons[r-1][c+1].mousePressed();
+      if(isValid(r-1,c-1) == true && buttons[r-1][c-1].isClicked() == false)
+        buttons[r-1][c-1].mousePressed();
+
+    }//your code here
   }
 
   public void draw () 
