@@ -37,6 +37,7 @@ public void setBombs()
       System.out.println(row + "," + col);
     }//your code
   }
+  System.out.println(bombs);
 }
 
 
@@ -61,11 +62,36 @@ public boolean isWon()
 
 public void displayLosingMessage()
 {
-  //your code here
+  
+  for(int i = 0; i < bombs.size(); i++){
+    bombs.get(i).clicked = true;
+  }
+  buttons[9][6].setLabel("G");
+  buttons[9][7].setLabel("a");
+  buttons[9][8].setLabel("m");
+  buttons[9][9].setLabel("e");
+  buttons[9][10].setLabel("");
+  buttons[9][11].setLabel("O");
+  buttons[9][12].setLabel("v");
+  buttons[9][13].setLabel("e");
+  buttons[9][14].setLabel("r");
+  System.out.println("lose");//your code here
 }
 public void displayWinningMessage()
 {
-  //your code here
+  
+  buttons[9][6].setLabel("S");
+  buttons[9][7].setLabel("t");
+  buttons[9][8].setLabel("a");
+  buttons[9][9].setLabel("g");
+  buttons[9][10].setLabel("e");
+  buttons[9][11].setLabel("");
+  buttons[9][12].setLabel("C");
+  buttons[9][13].setLabel("l");
+  buttons[9][14].setLabel("e");
+  buttons[9][15].setLabel("a");
+  buttons[9][16].setLabel("r");
+  buttons[9][17].setLabel("!");//your code here
 }
 
 public class MSButton
@@ -105,8 +131,10 @@ public class MSButton
     if(marked == false)
     clicked = false;
     }
-    else if(bombs.contains(this))
-    displayLosingMessage();
+    else if(bombs.contains(this)){
+      displayLosingMessage();
+      System.out.println("Bomb!");
+    }
     else if (countBombs(r,c) > 0)
     setLabel("" +countBombs(r,c));
     else {
